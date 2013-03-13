@@ -2,12 +2,20 @@
 Tuntikirjanpito
 ===============
 
-2013-03-13 00:29:06: Ohjeiden lukua
-2013-03-13 00:36:05: Netbeans projekti
-2013-03-13 00:46:50: Github repo, push ja labtool
-2013-03-13 01:13:21: Alustava aihemäärittely tehty
+2013-03-13
+----------
 
-2013-03-13 01:16:09: Aloitettu koodaus
-2013-03-13 02:01:04: Lopetettu koodaus
-2013-03-13 13:01:22: Koodausta
-2013-03-13 14:00:41: Algoritmi toteutettu, vaatii testausta, lopetaan
+00:29:06: Ohjeiden lukua
+00:36:05: Netbeans projekti
+00:46:50: Github repo, push ja labtool
+01:13:21: Alustava aihemäärittely tehty
+
+01:16:09: Aloitettu koodaus
+02:01:04: Lopetettu koodaus
+
+13:01:22: Koodausta
+14:00:41: Algoritmi toteutettu, vaatii testausta, lopetaan
+
+16:38:49: Testaus alkaa
+19:49:15: Ainakin tunti irkkausta yms, mutta algo toimii ja eka testi kirjoitettu
+21:14:11: Taas ainakin tunti haahuilua (ja yks perfotesti), joten lopetan ja teen töitä välillä

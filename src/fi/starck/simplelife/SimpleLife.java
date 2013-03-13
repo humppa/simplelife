@@ -5,25 +5,35 @@ package fi.starck.simplelife;
  */
 public class SimpleLife {
     public static void main(String[] argh) {
-        int size = 0;
-
-        if (argh.length < 1) {
-            System.out.println("Soo soo, tarvitaan koko.");
-            System.exit(1);
-        }
+        int size = 4096;
 
         try {
             size = Integer.parseInt(argh[0]);
         }
+        catch (ArrayIndexOutOfBoundsException aie) {
+        }
         catch (NumberFormatException nfe) {
-            System.out.println("Soo, soo, pitää olla numero.");
-            System.exit(1);
         }
 
         Life life = new Life(size);
 
-        while (true) {
-            life.toString();
+        life.glide();
+
+        int i = 0;
+
+        while (i < 100) {
+            if (i%10 == 0) System.out.print("[" + i + "]  " + life.toString() + "\n");
+
+            life.next();
+
+            i++;
+
+            /*
+            try {
+                Thread.sleep(1000);
+            }
+            catch (InterruptedException pass) {}
+            */
         }
     }
 }

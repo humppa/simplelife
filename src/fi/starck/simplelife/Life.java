@@ -15,12 +15,35 @@ class Life {
         }
 
         size = sz;
-        life = new BitSet(sz*sz);
-
-        System.out.println("D::len" + life.length());
-        System.out.println("D::siz" + life.size());
+        life = new BitSet(sz * sz);
     }
 
+    void clear(int index) {
+        life.clear(index);
+    }
+
+    void flip(int index) {
+        life.flip(index);
+    }
+
+    void set(int index) {
+        life.set(index);
+    }
+
+    void glide() {
+        life.set(1);
+        life.set(size+2);
+        life.set(2*size);
+        life.set(2*size+1);
+        life.set(2*size+2);
+    }
+
+    /**
+     1. Any live cell with fewer than two live neighbours dies
+     2. Any live cell with two or three live neighbours lives
+     3. Any live cell with more than three live neighbours dies
+     4. Any dead cell with exactly three live neighbours comes to life
+     */
     public void next() {
         int index;
 
@@ -30,13 +53,17 @@ class Life {
 
         /* Algorithm initialization.
          */
-        for (int i=0; i<size; i++) {
-            if (life.get(i) == true) {
-                prev[i-1]++;
-                prev[i+1]++;
-                curr[i-1]++;
-                curr[i  ]++;
-                curr[i+1]++;
+        for (int x=0; x<size; x++) {
+            if (life.get(x)) {
+                curr[x]++;
+                if (x > 0) {
+                    prev[x-1]++;
+                    curr[x-1]++;
+                }
+                if (x < size - 1) {
+                    prev[x+1]++;
+                    curr[x+1]++;
+                }
             }
         }
 
@@ -47,14 +74,18 @@ class Life {
                 index = size*y + x;
 
                 if (life.get(index) == true) {
-                    prev[x-1]++;
-                    prev[x  ]++;
-                    prev[x+1]++;
-                    curr[x-1]++;
-                    curr[x+1]++;
-                    next[x-1]++;
-                    next[x  ]++;
-                    next[x+1]++;
+                    prev[x]++;
+                    next[x]++;
+                    if (x > 0) {
+                        prev[x-1]++;
+                        curr[x-1]++;
+                        next[x-1]++;
+                    }
+                    if (x < size - 1) {
+                        prev[x+1]++;
+                        curr[x+1]++;
+                        next[x+1]++;
+                    }
                 }
             }
 
@@ -77,10 +108,65 @@ class Life {
             next = new int[size];
         }
 
-        /* 1. Any live cell with fewer than two live neighbours dies
-         * 2. Any live cell with two or three live neighbours lives
-         * 3. Any live cell with more than three live neighbours dies
-         * 4. Any dead cell with exactly three live neighbours reborns
+        /* Algorithm finalization.
          */
+        for (int x=0; x<size; x++) {
+            if (life.get(size*size-size+x)) {
+                prev[x]++;
+                if (x > 0) {
+                    prev[x-1]++;
+                    curr[x-1]++;
+                }
+                if (x < size - 1) {
+                    prev[x+1]++;
+                    curr[x+1]++;
+                }
+            }
+        }
+
+        for (int x=0; x<size; x++) {
+            index = size * (size - 2) + x;
+
+            if (prev[x] <= 1) {
+                life.clear(index);
+            }
+            else if (prev[x] == 3) {
+                life.set(index);
+            }
+            else if (prev[x] >= 4) {
+                life.clear(index);
+            }
+        }
+
+        for (int x=0; x<size; x++) {
+            index = size * (size - 1) + x;
+
+            if (curr[x] <= 1) {
+                life.clear(index);
+            }
+            else if (curr[x] == 3) {
+                life.set(index);
+            }
+            else if (curr[x] >= 4) {
+                life.clear(index);
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        return life.toString();
+
+        /*
+        String game = "\n";
+        for (int y = 0; y < size; y++) {
+            game += "[";
+            for (int x = 0; x < size; x++) {
+                game += (life.get(size * y + x)) ? "#" : " ";
+            }
+            game += "]\n";
+        }
+        return game;
+        */
     }
 }
