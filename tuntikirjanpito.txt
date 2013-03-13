@@ -5,3 +5,9 @@ Tuntikirjanpito
 2013-03-13 00:29:06: Ohjeiden lukua
 2013-03-13 00:36:05: Netbeans projekti
 2013-03-13 00:46:50: Github repo, push ja labtool
+2013-03-13 01:13:21: Alustava aihemäärittely tehty
+
+2013-03-13 01:16:09: Aloitettu koodaus
+2013-03-13 02:01:04: Lopetettu koodaus
+2013-03-13 13:01:22: Koodausta
+2013-03-13 14:00:41: Algoritmi toteutettu, vaatii testausta, lopetaan
