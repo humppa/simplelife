@@ -19,3 +19,9 @@ Tuntikirjanpito
 16:38:49: Testaus alkaa
 19:49:15: Ainakin tunti irkkausta yms, mutta algo toimii ja eka testi kirjoitettu
 21:14:11: Taas ainakin tunti haahuilua (ja yks perfotesti), joten lopetan ja teen töitä välillä
+
+2013-03-14
+----------
+
+21:03:54: Kokeillaan tehdä luokkakaavio
+22:29:51: Olipas Inkscape buginen. Ompas GoL yksinkertainen. Seuraavaksi kebabia.
