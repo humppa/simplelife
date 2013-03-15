@@ -25,3 +25,8 @@ Tuntikirjanpito
 
 21:03:54: Kokeillaan tehdä luokkakaavio
 22:29:51: Olipas Inkscape buginen. Ompas GoL yksinkertainen. Seuraavaksi kebabia.
+
+2013-03-15
+----------
+
+15:28:14: Deadline II - commit 2d95863
