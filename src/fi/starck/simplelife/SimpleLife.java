@@ -1,11 +1,13 @@
 package fi.starck.simplelife;
 
+import fi.starck.simplelife.gui.Testi;
+
 /**
  * @author Tuomas Starck
  */
 public class SimpleLife {
     public static void main(String[] argh) {
-        int size = 4096;
+        int size = 12;
 
         try {
             size = Integer.parseInt(argh[0]);
@@ -19,21 +21,12 @@ public class SimpleLife {
 
         life.glide();
 
-        int i = 0;
+        Testi testi = new Testi(life);
 
-        while (i < 100) {
-            if (i%10 == 0) System.out.print("[" + i + "]  " + life.toString() + "\n");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException pass) {}
 
-            life.next();
-
-            i++;
-
-            /*
-            try {
-                Thread.sleep(1000);
-            }
-            catch (InterruptedException pass) {}
-            */
-        }
+        System.exit(0);
     }
 }

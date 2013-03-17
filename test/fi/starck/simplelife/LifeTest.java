@@ -40,13 +40,11 @@ public class LifeTest {
 
         assertEquals(begin, life.toString());
 
-        life.next();
+        life.step();
 
         assertEquals(next, life.toString());
 
-        for (int i=0; i<151; i++) {
-            life.next();
-        }
+        life.walk(151);
 
         assertEquals(end, life.toString());
     }

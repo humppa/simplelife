@@ -1,13 +1,18 @@
 package fi.starck.simplelife;
 
+import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.Iterator;
 
 /**
  * @author Tuomas Starck
  */
-class Life {
+public class Life  implements Iterable<Integer> {
     private int size;
     private BitSet life;
+
+    private int iptr;
+    private int[] glider = {1, 12+2, 2*12, 2*12+1, 2*12+2};
 
     public Life(int sz) {
         if (sz <3) {
@@ -16,6 +21,21 @@ class Life {
 
         size = sz;
         life = new BitSet(sz * sz);
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    @Override
+    public Iterator<Integer> iterator() {
+        ArrayList<Integer> tmp = new ArrayList<Integer>();
+        tmp.add(1);
+        tmp.add(size+2);
+        tmp.add(2*size);
+        tmp.add(2*size+1);
+        tmp.add(2*size+2);
+        return tmp.iterator();
     }
 
     void clear(int index) {
@@ -30,6 +50,9 @@ class Life {
         life.set(index);
     }
 
+    /**
+     * FIXME for debugging.
+     */
     void glide() {
         life.set(1);
         life.set(size+2);
@@ -39,12 +62,25 @@ class Life {
     }
 
     /**
+     * N steps of cellular automation.
+     *
+     * @param n Number of steps.
+     */
+    public void walk(int n) {
+        for (int i=0; i<n; i++) {
+            step();
+        }
+    }
+
+    /**
+     * One step of cellular automation.
+     *
      1. Any live cell with fewer than two live neighbours dies
      2. Any live cell with two or three live neighbours lives
      3. Any live cell with more than three live neighbours dies
      4. Any dead cell with exactly three live neighbours comes to life
      */
-    public void next() {
+    public void step() {
         int index;
 
         int[] prev = new int[size];
