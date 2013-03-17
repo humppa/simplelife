@@ -23,10 +23,18 @@ Tuntikirjanpito
 2013-03-14
 ----------
 
-21:03:54: Kokeillaan tehdä luokkakaavio
+21:03:54: Kokeillaan tehdä luokkakaavio.
 22:29:51: Olipas Inkscape buginen. Ompas GoL yksinkertainen. Seuraavaksi kebabia.
 
 2013-03-15
 ----------
 
 15:28:14: Deadline II - commit 2d95863
+15:29:43: Seuraavaksi katsotaan, kuinka AWT.Canvas pelaa.
+19:04:32: Irkkasin ja feisbuukkasin, mutta myös prototyyppasin ja luin dokuja.
+
+2013-03-17
+----------
+
+10:30:57: Aloitetaan uusi upea LifeSet.
+14:26:50: Kipeänä koodaaminen ei oo kovin tehokasta, mutta LifeSet tehty.
