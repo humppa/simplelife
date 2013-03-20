@@ -56,14 +56,14 @@ public class LifeSet extends BitSet implements Iterator<Integer> {
     public void remove() {}
 
     /**
-     * Translate (x,y) to BitSet position.
+     * Get the bit value of the specified x,y coordinate.
      *
      * @param x Column.
      * @param y Row.
-     * @return Position in BitSet.
+     * @return True if bit is set. False otherwise.
      */
-    private int tr(int x, int y) {
-        return y*width + x;
+    public boolean isset(int x, int y) {
+        return get(y*width + x);
     }
 
     /**
@@ -81,8 +81,6 @@ public class LifeSet extends BitSet implements Iterator<Integer> {
      * One step of cellular automation.
      */
     public void step() {
-        int index;
-
         /* Initializing buffers.
          */
         int[] prev = new int[width];
@@ -92,7 +90,7 @@ public class LifeSet extends BitSet implements Iterator<Integer> {
         /* Scan 1st row before main loop.
          */
         for (int x=0; x<width; x++) {
-            if (get(x)) {
+            if (isset(x, 0)) {
                 curr[x]++;
                 if (x > 0) {
                     prev[x-1]++;
@@ -108,37 +106,34 @@ public class LifeSet extends BitSet implements Iterator<Integer> {
         /* Main algo loop.
          */
         for (int y=1; y<height-1; y++) {
-            index = tr(0, y);
-            if (get(index)) {
-                prev[index]++;
-                prev[index+1]++;
-                curr[index+1]++;
-                next[index+1]++;
-                next[index]++;
+            if (isset(0, y)) {
+                prev[0]++;
+                prev[1]++;
+                curr[1]++;
+                next[1]++;
+                next[0]++;
             }
 
             for (int x=1; x<width-1; x++) {
-                index = tr(x, y);
-                if (get(index)) {
-                    prev[index-1]++;
-                    prev[index]++;
-                    prev[index+1]++;
-                    curr[index-1]++;
-                    curr[index]++;
-                    curr[index+1]++;
-                    next[index-1]++;
-                    next[index]++;
-                    next[index+1]++;
+                if (isset(x, y)) {
+                    prev[x-1]++;
+                    prev[x]++;
+                    prev[x+1]++;
+                    curr[x-1]++;
+                    curr[x]++;
+                    curr[x+1]++;
+                    next[x-1]++;
+                    next[x]++;
+                    next[x+1]++;
                 }
             }
 
-            index = tr(width-1, y);
-            if (get(index)) {
-                prev[index]++;
-                prev[index-1]++;
-                curr[index-1]++;
-                next[index-1]++;
-                next[index]++;
+            if (isset(width-1, y)) {
+                prev[width-1]++;
+                prev[width-2]++;
+                curr[width-2]++;
+                next[width-2]++;
+                next[width-1]++;
             }
 
             /* At this point, we have complete knowledge of the
@@ -151,16 +146,16 @@ public class LifeSet extends BitSet implements Iterator<Integer> {
              *   Four or more neighbours => death by overcrowding
              */
             for (int x=0; x<width; x++) {
-                index = tr(x, y-1);
+                int co = width*(y-1) + x;
 
                 if (prev[x] < 2) {
-                    clear(index);
+                    clear(co);
                 }
                 else if (prev[x] == 3) {
-                    set(index);
+                    set(co);
                 }
                 else if (prev[x] >= 4) {
-                    clear(index);
+                    clear(co);
                 }
             }
 
@@ -174,7 +169,7 @@ public class LifeSet extends BitSet implements Iterator<Integer> {
         /* Scan last row and make final buffer updates.
          */
         for (int x=0; x<width; x++) {
-            if (get(width*(height-1)+x)) {
+            if (isset(x, height-1)) {
                 prev[x]++;
                 if (x > 0) {
                     prev[x-1]++;
@@ -189,29 +184,30 @@ public class LifeSet extends BitSet implements Iterator<Integer> {
 
         /* Update game status on last two rows.
          */
+        int co;
         for (int x=0; x<width; x++) {
-            index = tr(x, height-2);
+            co = width*(height-2) + x;
 
             if (prev[x] < 2) {
-                clear(index);
+                clear(co);
             }
             else if (prev[x] == 3) {
-                set(index);
+                set(co);
             }
             else if (prev[x] >= 4) {
-                clear(index);
+                clear(co);
             }
 
-            index = tr(x, height-1);
+            co = width*(height-1) + x;
 
             if (curr[x] < 2) {
-                clear(index);
+                clear(co);
             }
             else if (curr[x] == 3) {
-                set(index);
+                set(co);
             }
             else if (curr[x] >= 4) {
-                clear(index);
+                clear(co);
             }
         }
     }

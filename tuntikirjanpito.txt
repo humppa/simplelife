@@ -38,3 +38,17 @@ Tuntikirjanpito
 
 10:30:57: Aloitetaan uusi upea LifeSet.
 14:26:50: Kipeänä koodaaminen ei oo kovin tehokasta, mutta LifeSet tehty.
+
+2013-03-19
+----------
+
+16:42:22: En oo enää kipeänä, joten voisin Swingata.
+19:02:56: Nyt ois jonkinlainen käli, mutta kaikki on rikki. Seuraavaksi joskus debugaamista.
+
+TODO
+----
+ * Kirjoita LifeSetille testit
+ * Debugaa LifeSet
+ * Päivitä aihemäärittely vastaamaan suunnitelmaa
+ * Päivitä luokkakaavio vastaamaan todellisuutta
+ * Sirottele Javadoccia koodiin
