@@ -45,10 +45,14 @@ Tuntikirjanpito
 16:42:22: En oo enää kipeänä, joten voisin Swingata.
 19:02:56: Nyt ois jonkinlainen käli, mutta kaikki on rikki. Seuraavaksi joskus debugaamista.
 
+2013-03-20
+----------
+
+15:05:48: Kokeillaan debugata LifeSet kuntoon.
+16:48:01: LifeSet toimii ja sille on kunnon testit. Jee.
+
 TODO
 ----
- * Kirjoita LifeSetille testit
- * Debugaa LifeSet
  * Päivitä aihemäärittely vastaamaan suunnitelmaa
  * Päivitä luokkakaavio vastaamaan todellisuutta
  * Sirottele Javadoccia koodiin

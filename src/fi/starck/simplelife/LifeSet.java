@@ -1,15 +1,13 @@
 package fi.starck.simplelife;
 
 import java.util.BitSet;
-import java.util.Iterator;
 
 /**
  * @author Tuomas Starck
  */
-public class LifeSet extends BitSet implements Iterator<Integer> {
+public class LifeSet extends BitSet {
     private int width;
     private int height;
-    private int index;
 
     public LifeSet(int w, int h) {
         super(w*h);
@@ -20,24 +18,9 @@ public class LifeSet extends BitSet implements Iterator<Integer> {
 
         width = w;
         height = h;
-        index = -1;
     }
 
-    @Override
-    public boolean hasNext() {
-        // for (int i=bs.nextSetBit(0); i>=0; i=bs.nextSetBit(i+1)) {}
-
-        index = nextSetBit(index+1);
-
-        if (index >= 0) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-    /* FIXME For debugging.
+    /* FIXME For easy debugging.
      */
     public void glider() {
         set(1);
@@ -47,14 +30,6 @@ public class LifeSet extends BitSet implements Iterator<Integer> {
         set(2*width+2);
     }
 
-    @Override
-    public Integer next() {
-        return index;
-    }
-
-    @Override
-    public void remove() {}
-
     /**
      * Get the bit value of the specified x,y coordinate.
      *
@@ -62,7 +37,7 @@ public class LifeSet extends BitSet implements Iterator<Integer> {
      * @param y Row.
      * @return True if bit is set. False otherwise.
      */
-    public boolean isset(int x, int y) {
+    public boolean isset(int y, int x) {
         return get(y*width + x);
     }
 
@@ -90,7 +65,7 @@ public class LifeSet extends BitSet implements Iterator<Integer> {
         /* Scan 1st row before main loop.
          */
         for (int x=0; x<width; x++) {
-            if (isset(x, 0)) {
+            if (isset(0, x)) {
                 curr[x]++;
                 if (x > 0) {
                     prev[x-1]++;
@@ -106,7 +81,7 @@ public class LifeSet extends BitSet implements Iterator<Integer> {
         /* Main algo loop.
          */
         for (int y=1; y<height-1; y++) {
-            if (isset(0, y)) {
+            if (isset(y, 0)) {
                 prev[0]++;
                 prev[1]++;
                 curr[1]++;
@@ -115,12 +90,11 @@ public class LifeSet extends BitSet implements Iterator<Integer> {
             }
 
             for (int x=1; x<width-1; x++) {
-                if (isset(x, y)) {
+                if (isset(y, x)) {
                     prev[x-1]++;
                     prev[x]++;
                     prev[x+1]++;
                     curr[x-1]++;
-                    curr[x]++;
                     curr[x+1]++;
                     next[x-1]++;
                     next[x]++;
@@ -128,7 +102,7 @@ public class LifeSet extends BitSet implements Iterator<Integer> {
                 }
             }
 
-            if (isset(width-1, y)) {
+            if (isset(y, width-1)) {
                 prev[width-1]++;
                 prev[width-2]++;
                 curr[width-2]++;
@@ -169,7 +143,7 @@ public class LifeSet extends BitSet implements Iterator<Integer> {
         /* Scan last row and make final buffer updates.
          */
         for (int x=0; x<width; x++) {
-            if (isset(x, height-1)) {
+            if (isset(height-1, x)) {
                 prev[x]++;
                 if (x > 0) {
                     prev[x-1]++;
