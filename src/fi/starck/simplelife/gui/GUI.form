@@ -27,7 +27,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="menuPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="19" max="32767" attributes="0"/>
           </Group>
           <Component id="scrollBox" alignment="0" max="32767" attributes="0"/>
       </Group>
@@ -69,7 +69,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="564" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="572" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -103,7 +103,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="stepButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="walkButton" min="-2" max="-2" attributes="0"/>
+                  <Component id="startStopButton" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -118,7 +118,7 @@
                   <Component id="labelDelay" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="formDelay" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="stepButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="walkButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="startStopButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -187,11 +187,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Step"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stepAction"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="walkButton">
+        <Component class="javax.swing.JButton" name="startStopButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Walk"/>
+            <Property name="text" type="java.lang.String" value="Start"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="startStopAction"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

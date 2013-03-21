@@ -2,17 +2,21 @@ package fi.starck.simplelife.gui;
 
 import fi.starck.simplelife.LifeSet;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /**
  * @author Tuomas Starck
  */
-public class LifeCanvas extends JPanel {
+public class LifeCanvas extends JPanel implements ActionListener {
     public LifeCanvas() {
         width = 42;
         height = 36;
         unit = 10;
-        delay = 1;
+        delay = 1.0f;
+        timer = null;
         createNewLife();
     }
 
@@ -42,20 +46,36 @@ public class LifeCanvas extends JPanel {
         repaint();
     }
 
+    void step() {
+        life.step();
+        repaint();
+    }
+
+    boolean startStop() {
+        if (timer == null) {
+            timer = new Timer(getDelay(), this);
+            timer.start();
+            return true;
+        }
+        else {
+            timer.stop();
+            timer = null;
+            return false;
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        step();
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         for (int i=life.nextSetBit(0); i>=0; i=life.nextSetBit(i+1)) {
-            int x = i%width;
-            int y = i/width;
-
-            System.out.println("u::" + unit + " i::" + i + " => " + x + "," + y + " (w,h) (" + width + "," + height + ")");
-
-            g.fillRect(x*unit, y*unit, unit, unit);
+            g.fillRect((i%width)*unit, (i/width)*unit, unit, unit);
         }
-
-        System.out.println();
     }
 
     private int unit;
@@ -63,15 +83,14 @@ public class LifeCanvas extends JPanel {
     private int height;
     private float delay;
     private LifeSet life;
+    private Timer timer;
+
+    private int getDelay() {
+        return (int) (delay*1000);
+    }
 
     private void createNewLife() {
         life = new LifeSet(width, height);
-
-        System.out.println("new life by " + width + "," + height);
-        System.out.println(life.toString());
-
         repaint();
-
-        // life.glider(); // // DEBUG // //
     }
 }

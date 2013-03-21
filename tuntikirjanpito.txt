@@ -60,6 +60,7 @@ Tuntikirjanpito
 
 14:53:24: Lisää käleilyä.
 16:37:31: No nyt ois jotkut perusjutut kälissä ehjät ja toimivat. Tästä on hyvä commitoida.
+19:40:48: Perussälät kälissä on ja toimii. Lisäksi tää oli hyvä: http://goo.gl/biY3Y
 
 TODO
 ----

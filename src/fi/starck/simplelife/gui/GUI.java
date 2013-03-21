@@ -27,7 +27,7 @@ public class GUI extends JPanel {
         labelDelay = new javax.swing.JLabel();
         formDelay = new JFormattedTextField(floatFormat);
         stepButton = new javax.swing.JButton();
-        walkButton = new javax.swing.JButton();
+        startStopButton = new javax.swing.JButton();
 
         setBorder(null);
         setMinimumSize(new java.awt.Dimension(566, 454));
@@ -46,7 +46,7 @@ public class GUI extends JPanel {
         lifeCanvas.setLayout(lifeCanvasLayout);
         lifeCanvasLayout.setHorizontalGroup(
             lifeCanvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 564, Short.MAX_VALUE)
+            .addGap(0, 572, Short.MAX_VALUE)
         );
         lifeCanvasLayout.setVerticalGroup(
             lifeCanvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,8 +90,18 @@ public class GUI extends JPanel {
         });
 
         stepButton.setText("Step");
+        stepButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stepAction(evt);
+            }
+        });
 
-        walkButton.setText("Walk");
+        startStopButton.setText("Start");
+        startStopButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startStopAction(evt);
+            }
+        });
 
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
@@ -114,7 +124,7 @@ public class GUI extends JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(stepButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(walkButton))
+                .addComponent(startStopButton))
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,7 +137,7 @@ public class GUI extends JPanel {
                 .addComponent(labelDelay)
                 .addComponent(formDelay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(stepButton)
-                .addComponent(walkButton))
+                .addComponent(startStopButton))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -137,7 +147,7 @@ public class GUI extends JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
             .addComponent(scrollBox)
         );
         layout.setVerticalGroup(
@@ -186,6 +196,32 @@ public class GUI extends JPanel {
         lifeCanvas.flipBit(evt.getX(), evt.getY());
     }//GEN-LAST:event_mouseClick
 
+    /**
+     * Handle step button.
+     *
+     * @param evt Useless event.
+     */
+    private void stepAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stepAction
+        lifeCanvas.step();
+    }//GEN-LAST:event_stepAction
+
+    /**
+     * Handle start/stop button events.
+     *
+     * If automation is running, change the text of the button to "Stop"
+     * and "Start" otherwise.
+     *
+     * @param evt Useless event.
+     */
+    private void startStopAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startStopAction
+        if (lifeCanvas.startStop()) {
+            startStopButton.setText("Stop");
+        }
+        else {
+            startStopButton.setText("Start");
+        }
+    }//GEN-LAST:event_startStopAction
+
     private final NumberFormat intFormat = NumberFormat.getIntegerInstance();
     private final NumberFormat floatFormat = NumberFormat.getNumberInstance();
 
@@ -200,7 +236,7 @@ public class GUI extends JPanel {
     private fi.starck.simplelife.gui.LifeCanvas lifeCanvas;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JScrollPane scrollBox;
+    private javax.swing.JButton startStopButton;
     private javax.swing.JButton stepButton;
-    private javax.swing.JButton walkButton;
     // End of variables declaration//GEN-END:variables
 }
