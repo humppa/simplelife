@@ -6,9 +6,6 @@ import java.util.BitSet;
  * @author Tuomas Starck
  */
 public class LifeSet extends BitSet {
-    private int width;
-    private int height;
-
     public LifeSet(int w, int h) {
         super(w*h);
 
@@ -33,12 +30,24 @@ public class LifeSet extends BitSet {
     /**
      * Get the bit value of the specified x,y coordinate.
      *
-     * @param x Column.
      * @param y Row.
+     * @param x Column.
+     *
      * @return True if bit is set. False otherwise.
      */
-    public boolean isset(int y, int x) {
-        return get(y*width + x);
+    public boolean getLife(int y, int x) {
+        return get(width*y + x);
+    }
+
+    /**
+     * Change the bit value of the specified x,y coordinate.
+     *
+     * @param y Row.
+     * @param x Column.
+     */
+    public void flipLife(int y, int x) {
+        if (width <= x || height <= y) return;
+        flip(width*y + x);
     }
 
     /**
@@ -65,7 +74,7 @@ public class LifeSet extends BitSet {
         /* Scan 1st row before main loop.
          */
         for (int x=0; x<width; x++) {
-            if (isset(0, x)) {
+            if (getLife(0, x)) {
                 curr[x]++;
                 if (x > 0) {
                     prev[x-1]++;
@@ -81,7 +90,7 @@ public class LifeSet extends BitSet {
         /* Main algo loop.
          */
         for (int y=1; y<height-1; y++) {
-            if (isset(y, 0)) {
+            if (getLife(y, 0)) {
                 prev[0]++;
                 prev[1]++;
                 curr[1]++;
@@ -90,7 +99,7 @@ public class LifeSet extends BitSet {
             }
 
             for (int x=1; x<width-1; x++) {
-                if (isset(y, x)) {
+                if (getLife(y, x)) {
                     prev[x-1]++;
                     prev[x]++;
                     prev[x+1]++;
@@ -102,7 +111,7 @@ public class LifeSet extends BitSet {
                 }
             }
 
-            if (isset(y, width-1)) {
+            if (getLife(y, width-1)) {
                 prev[width-1]++;
                 prev[width-2]++;
                 curr[width-2]++;
@@ -143,7 +152,7 @@ public class LifeSet extends BitSet {
         /* Scan last row and make final buffer updates.
          */
         for (int x=0; x<width; x++) {
-            if (isset(height-1, x)) {
+            if (getLife(height-1, x)) {
                 prev[x]++;
                 if (x > 0) {
                     prev[x-1]++;
@@ -185,4 +194,7 @@ public class LifeSet extends BitSet {
             }
         }
     }
+
+    private int width;
+    private int height;
 }

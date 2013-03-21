@@ -49,20 +49,38 @@ public class LifeSetTest {
     }
 
     /**
-     * Test of isset() method, of class LifeSet.
+     * Test of getLife() method, of class LifeSet.
      */
     @Test
-    public void testIsset() {
-        assertTrue(life.isset(0, 1));
-        assertTrue(life.isset(1, 2));
-        assertTrue(life.isset(2, 0));
-        assertTrue(life.isset(2, 1));
-        assertTrue(life.isset(2, 2));
+    public void testGetLife() {
+        assertTrue(life.getLife(0, 1));
+        assertTrue(life.getLife(1, 2));
+        assertTrue(life.getLife(2, 0));
+        assertTrue(life.getLife(2, 1));
+        assertTrue(life.getLife(2, 2));
 
-        assertFalse(life.isset(0, 0));
-        assertFalse(life.isset(0, 2));
-        assertFalse(life.isset(1, 0));
-        assertFalse(life.isset(1, 1));
+        assertFalse(life.getLife(0, 0));
+        assertFalse(life.getLife(0, 2));
+        assertFalse(life.getLife(1, 0));
+        assertFalse(life.getLife(1, 1));
+    }
+
+    /**
+     * Test of flipLife() method, of class LifeSet.
+     */
+    @Test
+    public void testFlipLife() {
+        life.flipLife(0, 0);
+        life.flipLife(0, 1);
+        life.flipLife(0, 2);
+        life.flipLife(0, 3);
+
+        life.flipLife(2, 0);
+        life.flipLife(2, 1);
+        life.flipLife(2, 2);
+        life.flipLife(2, 3);
+
+        assertEquals("{0, 2, 3, 44, 87}", life.toString());
     }
 
     /**
