@@ -50,6 +50,16 @@ Tuntikirjanpito
 
 15:05:48: Kokeillaan debugata LifeSet kuntoon.
 16:48:01: LifeSet toimii ja sille on kunnon testit. Jee.
+17:46:34: Meen lounaalle.
+
+20:57:41: Join oluen. Ehkä nyt on hyvä hetki yrittää säätää käliä.
+01:38:17: Örrörröö. Kohti kotia.
+
+2013-03-21
+----------
+
+14:53:24: Lisää käleilyä.
+16:37:31: No nyt ois jotkut perusjutut kälissä ehjät ja toimivat. Tästä on hyvä commitoida.
 
 TODO
 ----
