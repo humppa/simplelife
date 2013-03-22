@@ -36,6 +36,11 @@ public class GUI extends JPanel {
 
         lifeCanvas.setBorder(null);
         lifeCanvas.setPreferredSize(new java.awt.Dimension(420, 360));
+        lifeCanvas.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                mouseWheelEvent(evt);
+            }
+        });
         lifeCanvas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mouseClick(evt);
@@ -221,6 +226,10 @@ public class GUI extends JPanel {
             startStopButton.setText("Start");
         }
     }//GEN-LAST:event_startStopAction
+
+    private void mouseWheelEvent(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_mouseWheelEvent
+        lifeCanvas.zoom(evt.getWheelRotation());
+    }//GEN-LAST:event_mouseWheelEvent
 
     private final NumberFormat intFormat = NumberFormat.getIntegerInstance();
     private final NumberFormat floatFormat = NumberFormat.getNumberInstance();

@@ -64,6 +64,17 @@ public class LifeCanvas extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Change the size of the drawing unit.
+     *
+     * @param i Delta.
+     */
+    void zoom(int i) {
+        unit -= i;
+        if (unit <= 0) unit = 1;
+        repaint();
+    }
+
     @Override
     public void actionPerformed(ActionEvent ae) {
         step();

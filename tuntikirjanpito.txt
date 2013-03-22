@@ -62,8 +62,16 @@ Tuntikirjanpito
 16:37:31: No nyt ois jotkut perusjutut kälissä ehjät ja toimivat. Tästä on hyvä commitoida.
 19:40:48: Perussälät kälissä on ja toimii. Lisäksi tää oli hyvä: http://goo.gl/biY3Y
 
+2013-03-22
+----------
+
+14:27:05: Lisää kälirunkkausta.
+
 TODO
 ----
  * Päivitä aihemäärittely vastaamaan suunnitelmaa
  * Päivitä luokkakaavio vastaamaan todellisuutta
  * Sirottele Javadoccia koodiin
+ * Hiiriskrollizoomi
+ * Pidä pelitila kentän muuttuessa
+ * Load ja save
