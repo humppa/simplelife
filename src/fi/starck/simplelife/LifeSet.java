@@ -17,26 +17,18 @@ public class LifeSet extends BitSet {
         height = h;
     }
 
-    /* FIXME For easy debugging.
+    /**
+     * @return The width of the set.
      */
-    public void glider() {
-        set(1);
-        set(width+2);
-        set(2*width);
-        set(2*width+1);
-        set(2*width+2);
+    public int getWidth() {
+        return width;
     }
 
     /**
-     * Get the bit value of the specified x,y coordinate.
-     *
-     * @param y Row.
-     * @param x Column.
-     *
-     * @return True if bit is set. False otherwise.
+     * @return The height of the set.
      */
-    public boolean getLife(int y, int x) {
-        return get(width*y + x);
+    public int getHeight() {
+        return height;
     }
 
     /**
@@ -193,6 +185,18 @@ public class LifeSet extends BitSet {
                 clear(co);
             }
         }
+    }
+
+    /**
+     * Get the bit value of the specified x,y coordinate.
+     *
+     * @param y Row.
+     * @param x Column.
+     *
+     * @return True if bit is set. False otherwise.
+     */
+    private boolean getLife(int y, int x) {
+        return get(width*y + x);
     }
 
     private int width;

@@ -1,9 +1,9 @@
 package fi.starck.simplelife;
 
 import org.junit.After;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  * @author Tuomas Starck
@@ -34,6 +34,9 @@ public class LifeSetTest {
         life.set(2*size + 1);
         life.set(2*size + 2);
 
+        assertEquals(size, life.getWidth());
+        assertEquals(size, life.getHeight());
+
         assertEquals("{1, 44, 84, 85, 86}", life.toString());
     }
 
@@ -46,23 +49,6 @@ public class LifeSetTest {
     @Test(expected = IllegalArgumentException.class)
     public void testLifeSet() {
         LifeSet shouldFail = new LifeSet(2, 4);
-    }
-
-    /**
-     * Test of getLife() method, of class LifeSet.
-     */
-    @Test
-    public void testGetLife() {
-        assertTrue(life.getLife(0, 1));
-        assertTrue(life.getLife(1, 2));
-        assertTrue(life.getLife(2, 0));
-        assertTrue(life.getLife(2, 1));
-        assertTrue(life.getLife(2, 2));
-
-        assertFalse(life.getLife(0, 0));
-        assertFalse(life.getLife(0, 2));
-        assertFalse(life.getLife(1, 0));
-        assertFalse(life.getLife(1, 1));
     }
 
     /**
