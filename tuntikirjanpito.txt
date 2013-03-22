@@ -66,12 +66,12 @@ Tuntikirjanpito
 ----------
 
 14:27:05: Lisää kälirunkkausta.
+17:19:04: Lataus ja talletus tehty ja toimii. Javan serialisointi on mainio.
 
 TODO
 ----
  * Päivitä aihemäärittely vastaamaan suunnitelmaa
  * Päivitä luokkakaavio vastaamaan todellisuutta
  * Sirottele Javadoccia koodiin
- * Hiiriskrollizoomi
  * Pidä pelitila kentän muuttuessa
- * Load ja save
+ * Lisää virhekeskusteluikkuna

@@ -46,6 +46,17 @@ public class LifeCanvas extends JPanel implements ActionListener {
         repaint();
     }
 
+    Object getLifeSet() {
+        return life;
+    }
+
+    void setLifeSet(Object o) {
+        life = (LifeSet) o;
+        width = life.getWidth();
+        height = life.getHeight();
+        invalidate();
+    }
+
     void step() {
         life.step();
         repaint();
