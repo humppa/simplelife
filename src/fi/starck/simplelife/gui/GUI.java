@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.text.NumberFormat;
 import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -259,12 +260,13 @@ public class GUI extends JPanel {
             repaint();
         }
         catch (FileNotFoundException fnfe) {
-            // FIXME
-            // täyttele nääkin catchit joillain alerteilla
+            showError(E_FNF);
         }
         catch (IOException ioe) {
+            showError(E_IO);
         }
         catch (ClassNotFoundException cnfe) {
+            showError(E_CNF);
         }
     }//GEN-LAST:event_loadAction
 
@@ -283,20 +285,24 @@ public class GUI extends JPanel {
             objectOut.writeObject(lifeCanvas.getLifeSet());
         }
         catch (FileNotFoundException fnfe) {
-            // FIXME
-            // tässä ois syytä sanoa käyttäjälle, että
-            // läskiksi meni
-            // eli pitäis tehä jokin sopiva alert dialogi
-            // ja sit käyttää sitä
-            System.out.println("save: läskiksi meni");
+            showError(E_FNF);
         }
         catch (IOException ioe) {
-            System.out.println("save: ihrapippuria tuli");
+            showError(E_IO);
         }
     }//GEN-LAST:event_saveAction
 
+    private final String
+            E_FNF = "Could not open file! Please, check permissions.",
+            E_IO  = "I/O failed! Please, be more careful when choosing a file.",
+            E_CNF = "Unable to load Life from specified file.";
+
     private final NumberFormat intFormat = NumberFormat.getIntegerInstance();
     private final NumberFormat floatFormat = NumberFormat.getNumberInstance();
+
+    private void showError(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField formDelay;
