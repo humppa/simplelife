@@ -74,10 +74,20 @@ Tuntikirjanpito
 10:35:10: Virhedialogit.
 11:03:59: Tehty. Jei.
 
+2013-04-05
+----------
+
+13:02:22: Aloitellaan testaus ja kälin suoraviivaistaminen.
+15:17:59: Hyvin menee, mutta välillä pitää käydä kiipeilemässä. Heihei!
+
+19:37:09: Jatkuu...
+20:21:58: Valmis.
+
 TODO
 ----
- * Päivitä aihemäärittely vastaamaan suunnitelmaa
- * Päivitä luokkakaavio vastaamaan todellisuutta
- * Sirottele Javadoccia koodiin
- * Pidä pelitila kentän muuttuessa
- * Laita peli skaalautumaan ohjelman ikkunan mukaan
+ - Päivitä aihemäärittely vastaamaan suunnitelmaa
+ - Päivitä luokkakaavio vastaamaan todellisuutta
+ - Sirottele Javadoccia koodiin
+ - Erottele load ja save ja kirjoita niille testit
+ + Pidä pelitila kentän muuttuessa
+ + Laita peli skaalautumaan ohjelman ikkunan mukaan

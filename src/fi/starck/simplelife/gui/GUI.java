@@ -28,9 +28,6 @@ public class GUI extends JPanel {
         scrollBox = new javax.swing.JScrollPane();
         lifeCanvas = new fi.starck.simplelife.gui.LifeCanvas();
         menuPanel = new javax.swing.JPanel();
-        labelSize = new javax.swing.JLabel();
-        formX = new JFormattedTextField(intFormat);
-        formY = new JFormattedTextField(intFormat);
         labelDelay = new javax.swing.JLabel();
         formDelay = new JFormattedTextField(floatFormat);
         stepButton = new javax.swing.JButton();
@@ -39,12 +36,12 @@ public class GUI extends JPanel {
         saveButton = new javax.swing.JButton();
 
         setBorder(null);
-        setMinimumSize(new java.awt.Dimension(566, 454));
+        setMinimumSize(new java.awt.Dimension(0, 0));
 
         scrollBox.setBorder(null);
 
-        lifeCanvas.setBorder(null);
-        lifeCanvas.setPreferredSize(new java.awt.Dimension(420, 360));
+        lifeCanvas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 0, 0), 2));
+        lifeCanvas.setPreferredSize(new java.awt.Dimension(0, 0));
         lifeCanvas.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
             public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
                 mouseWheelEvent(evt);
@@ -60,34 +57,19 @@ public class GUI extends JPanel {
         lifeCanvas.setLayout(lifeCanvasLayout);
         lifeCanvasLayout.setHorizontalGroup(
             lifeCanvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 639, Short.MAX_VALUE)
+            .addGap(0, 343, Short.MAX_VALUE)
         );
         lifeCanvasLayout.setVerticalGroup(
             lifeCanvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 448, Short.MAX_VALUE)
+            .addGap(0, 254, Short.MAX_VALUE)
         );
 
         scrollBox.setViewportView(lifeCanvas);
 
-        labelSize.setText("Size of Game");
+        labelDelay.setText("Delay (cs)");
+        labelDelay.setToolTipText("Delay in centiseconds");
 
-        formX.setText("42");
-        formX.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                formattedChange(evt);
-            }
-        });
-
-        formY.setText("36");
-        formY.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                formattedChange(evt);
-            }
-        });
-
-        labelDelay.setText("Delay");
-
-        formDelay.setText("1");
+        formDelay.setText("10");
         formDelay.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 formattedChange(evt);
@@ -130,12 +112,6 @@ public class GUI extends JPanel {
                 .addComponent(loadButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(saveButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
-                .addComponent(labelSize)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(formX, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(formY, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(labelDelay)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -148,9 +124,6 @@ public class GUI extends JPanel {
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(labelSize)
-                .addComponent(formX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(formY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(labelDelay)
                 .addComponent(formDelay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(stepButton)
@@ -166,9 +139,9 @@ public class GUI extends JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollBox, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(62, Short.MAX_VALUE))
+                    .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(scrollBox))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,34 +149,10 @@ public class GUI extends JPanel {
                 .addContainerGap()
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollBox, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addComponent(scrollBox, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * Receive and handle change events in formatted text fields.
-     *
-     * NPE is ignored, because in some situations JFormattedTextField.getValue()
-     * returns null. It is ignored silently, because the value does not interest
-     * us in those situations.
-     *
-     * @param evt Event.
-     */
-    private void formattedChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_formattedChange
-        try {
-            if (evt.getSource() == formX) {
-                lifeCanvas.setWidth(((Number) formX.getValue()).intValue());
-            }
-            else if (evt.getSource() == formY) {
-                lifeCanvas.setHeight(((Number) formY.getValue()).intValue());
-            }
-            else if (evt.getSource() == formDelay) {
-                lifeCanvas.setDelay(((Number) formDelay.getValue()).floatValue());
-            }
-        }
-        catch (NullPointerException ignored) {}
-    }//GEN-LAST:event_formattedChange
 
     /**
      * Pass mouse clicks to canvas.
@@ -211,38 +160,35 @@ public class GUI extends JPanel {
      * @param evt Event.
      */
     private void mouseClick(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mouseClick
+        System.out.println("[click] at " + evt.getX() + "," + evt.getY());
         lifeCanvas.flipBit(evt.getX(), evt.getY());
     }//GEN-LAST:event_mouseClick
-
-    /**
-     * Handle step button.
-     *
-     * @param evt Useless event.
-     */
-    private void stepAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stepAction
-        lifeCanvas.step();
-    }//GEN-LAST:event_stepAction
-
-    /**
-     * Handle start/stop button events.
-     *
-     * If automation is running, change the text of the button to "Stop"
-     * and "Start" otherwise.
-     *
-     * @param evt Useless event.
-     */
-    private void startStopAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startStopAction
-        if (lifeCanvas.startStop()) {
-            startStopButton.setText("Stop");
-        }
-        else {
-            startStopButton.setText("Start");
-        }
-    }//GEN-LAST:event_startStopAction
 
     private void mouseWheelEvent(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_mouseWheelEvent
         lifeCanvas.zoom(evt.getWheelRotation());
     }//GEN-LAST:event_mouseWheelEvent
+
+    private void saveAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAction
+        File file;
+        FileOutputStream fileOut;
+        ObjectOutputStream objectOut;
+        JFileChooser choose = new JFileChooser();
+
+        choose.showSaveDialog(this);
+        file = choose.getSelectedFile();
+
+        try {
+            fileOut = new FileOutputStream(file);
+            objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(lifeCanvas.getLifeSet());
+        }
+        catch (FileNotFoundException fnfe) {
+            showError(E_FNF);
+        }
+        catch (IOException ioe) {
+            showError(E_IO);
+        }
+    }//GEN-LAST:event_saveAction
 
     private void loadAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadAction
         File file;
@@ -270,34 +216,55 @@ public class GUI extends JPanel {
         }
     }//GEN-LAST:event_loadAction
 
-    private void saveAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAction
-        File file;
-        FileOutputStream fileOut;
-        ObjectOutputStream objectOut;
-        JFileChooser choose = new JFileChooser();
+    /**
+     * Handle start/stop button events.
+     *
+     * If automation is running, change the text of the button to "Stop"
+     * and "Start" otherwise.
+     *
+     * @param evt Useless event.
+     */
+    private void startStopAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startStopAction
+        if (lifeCanvas.startStop()) {
+            startStopButton.setText("Stop");
+        }
+        else {
+            startStopButton.setText("Start");
+        }
+    }//GEN-LAST:event_startStopAction
 
-        choose.showSaveDialog(this);
-        file = choose.getSelectedFile();
+    /**
+     * Handle step button.
+     *
+     * @param evt Useless event.
+     */
+    private void stepAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stepAction
+        lifeCanvas.step();
+    }//GEN-LAST:event_stepAction
 
+    /**
+     * Receive and handle change events in formatted text fields.
+     *
+     * NPE is ignored, because in some situations JFormattedTextField.getValue()
+     * returns null. It is ignored silently, because the value does not interest
+     * us in those situations.
+     *
+     * @param evt Event.
+     */
+    private void formattedChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_formattedChange
         try {
-            fileOut = new FileOutputStream(file);
-            objectOut = new ObjectOutputStream(fileOut);
-            objectOut.writeObject(lifeCanvas.getLifeSet());
+            if (evt.getSource() == formDelay) {
+                lifeCanvas.setDelay(((Number) formDelay.getValue()).floatValue());
+            }
         }
-        catch (FileNotFoundException fnfe) {
-            showError(E_FNF);
-        }
-        catch (IOException ioe) {
-            showError(E_IO);
-        }
-    }//GEN-LAST:event_saveAction
+        catch (NullPointerException ignored) {}
+    }//GEN-LAST:event_formattedChange
 
     private final String
             E_FNF = "Could not open file! Please, check permissions.",
             E_IO  = "I/O failed! Please, be more careful when choosing a file.",
             E_CNF = "Unable to load Life from specified file.";
 
-    private final NumberFormat intFormat = NumberFormat.getIntegerInstance();
     private final NumberFormat floatFormat = NumberFormat.getNumberInstance();
 
     private void showError(String msg) {
@@ -306,10 +273,7 @@ public class GUI extends JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField formDelay;
-    private javax.swing.JFormattedTextField formX;
-    private javax.swing.JFormattedTextField formY;
     private javax.swing.JLabel labelDelay;
-    private javax.swing.JLabel labelSize;
     private fi.starck.simplelife.gui.LifeCanvas lifeCanvas;
     private javax.swing.JButton loadButton;
     private javax.swing.JPanel menuPanel;

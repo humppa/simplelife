@@ -17,6 +17,22 @@ public class LifeSet extends BitSet {
         height = h;
     }
 
+    public LifeSet(int w, int h, LifeSet old) {
+        this(w, h);
+
+        if (old == null) return;
+
+        int ow = old.getWidth();
+
+        if (w < old.getWidth() || h < old.getHeight()) {
+            throw new IllegalArgumentException();
+        }
+
+        for (int i=old.nextSetBit(0); i>=0; i=old.nextSetBit(i+1)) {
+            this.set(i/ow*width + i%ow);
+        }
+    }
+
     /**
      * @return The width of the set.
      */
@@ -33,6 +49,8 @@ public class LifeSet extends BitSet {
 
     /**
      * Change the bit value of the specified x,y coordinate.
+     *
+     * If the coordinate does not exist, do nothing.
      *
      * @param y Row.
      * @param x Column.
