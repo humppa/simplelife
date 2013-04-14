@@ -13,6 +13,8 @@
         </data>
         <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
             <word>isset</word>
+            <word>Java's</word>
+            <word>neighbouring</word>
             <word>neighbours</word>
         </spellchecker-wordlist>
     </configuration>

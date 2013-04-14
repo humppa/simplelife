@@ -14,10 +14,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
+ * Graphical user interface for Simple Life.
+ *
  * @author Tuomas Starck
  */
-public class GUI extends JPanel {
-    public GUI() {
+public class LifeGUI extends JPanel {
+    public LifeGUI() {
         initComponents();
     }
 
@@ -155,15 +157,19 @@ public class GUI extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Pass mouse clicks to canvas.
+     * Pass mouse click coordinates to game canvas.
      *
-     * @param evt Event.
+     * @param evt Event object.
      */
     private void mouseClick(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mouseClick
-        System.out.println("[click] at " + evt.getX() + "," + evt.getY());
         lifeCanvas.flipBit(evt.getX(), evt.getY());
     }//GEN-LAST:event_mouseClick
 
+    /**
+     * Pass mouse wheel action to game canvas.
+     *
+     * @param evt Event object which holds wheel rotation direction.
+     */
     private void mouseWheelEvent(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_mouseWheelEvent
         lifeCanvas.zoom(evt.getWheelRotation());
     }//GEN-LAST:event_mouseWheelEvent
@@ -217,10 +223,10 @@ public class GUI extends JPanel {
     }//GEN-LAST:event_loadAction
 
     /**
-     * Handle start/stop button events.
+     * Handle start and stop button events.
      *
-     * If automation is running, change the text of the button to "Stop"
-     * and "Start" otherwise.
+     * If automation is running, change the text of
+     * the button to [Stop] and [Start] otherwise.
      *
      * @param evt Useless event.
      */
@@ -243,13 +249,12 @@ public class GUI extends JPanel {
     }//GEN-LAST:event_stepAction
 
     /**
-     * Receive and handle change events in formatted text fields.
+     * Handle delay length change events in formatted field.
      *
-     * NPE is ignored, because in some situations JFormattedTextField.getValue()
-     * returns null. It is ignored silently, because the value does not interest
-     * us in those situations.
+     * NPE is silently ignored, because JFormattedTextField.getValue()
+     * returns null when user input does not validate.
      *
-     * @param evt Event.
+     * @param evt Event object.
      */
     private void formattedChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_formattedChange
         try {

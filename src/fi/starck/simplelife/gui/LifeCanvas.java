@@ -82,9 +82,6 @@ public class LifeCanvas extends JPanel implements ActionListener {
 
         if (width*unit < d.width || height*unit < d.height) {
             createNewLife(d.width/unit+1, d.height/unit+1);
-
-            System.out.println("eri kokonen: " + (height*unit) + " | " + d.height);
-            // eri kokonen: 360 | 361
         }
     }
 
