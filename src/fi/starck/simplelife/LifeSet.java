@@ -17,7 +17,7 @@ import java.util.BitSet;
  *
  * @author Tuomas Starck
  */
-public class LifeSet extends BitSet {
+public class LifeSet extends BitSet implements LifeLogic {
     /**
      * Create a new set.
      *
@@ -71,6 +71,7 @@ public class LifeSet extends BitSet {
     /**
      * @return The width of the set.
      */
+    @Override
     public int getWidth() {
         return width;
     }
@@ -78,6 +79,7 @@ public class LifeSet extends BitSet {
     /**
      * @return The height of the set.
      */
+    @Override
     public int getHeight() {
         return height;
     }
@@ -90,6 +92,7 @@ public class LifeSet extends BitSet {
      * @param y Row.
      * @param x Column.
      */
+    @Override
     public void flipLife(int y, int x) {
         if (width <= x || height <= y) return;
         flip(width*y + x);
@@ -131,6 +134,7 @@ public class LifeSet extends BitSet {
      *  + Reading the last row and updating the last two rows are done
      *    after the main loop.
      */
+    @Override
     public void step() {
         int index;
 
