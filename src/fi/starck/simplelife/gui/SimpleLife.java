@@ -1,6 +1,5 @@
-package fi.starck.simplelife;
+package fi.starck.simplelife.gui;
 
-import fi.starck.simplelife.gui.LifeGUI;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -9,8 +8,7 @@ import javax.swing.SwingUtilities;
  *
  * {@link http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life}
  *
- * @see LifeSet
- * @see LifeGUI
+ * @see fi.starck.simplelife.LifeSet
  *
  * @author Tuomas Starck
  */
