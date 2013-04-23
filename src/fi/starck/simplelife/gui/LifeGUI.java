@@ -42,7 +42,7 @@ public class LifeGUI extends JPanel {
 
         scrollBox.setBorder(null);
 
-        lifeCanvas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 0, 0), 2));
+        lifeCanvas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 100, 100)));
         lifeCanvas.setPreferredSize(new java.awt.Dimension(0, 0));
         lifeCanvas.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
             public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
@@ -59,11 +59,11 @@ public class LifeGUI extends JPanel {
         lifeCanvas.setLayout(lifeCanvasLayout);
         lifeCanvasLayout.setHorizontalGroup(
             lifeCanvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 343, Short.MAX_VALUE)
+            .addGap(0, 345, Short.MAX_VALUE)
         );
         lifeCanvasLayout.setVerticalGroup(
             lifeCanvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 254, Short.MAX_VALUE)
+            .addGap(0, 256, Short.MAX_VALUE)
         );
 
         scrollBox.setViewportView(lifeCanvas);
