@@ -95,11 +95,20 @@ Tuntikirjanpito
 13:18:10: Kylläpäs dokumentointi on raskasta.
 21:12:06: Ää ää ää. Ei enää ikinä.
 
+2013-04-19
+----------
+
+13:00:15: Selvittelyä.
+14:18:15: Refaktorointia.
+21:58:53: Nyt loppu. Välillä kotiin nukkumaan.
+
+2013-04-24
+----------
+
+01:47:46: Nyt oon jo niin monena päivänä unohtannu pitää kirjaa tunneista, että antaa jo olla.
+
 TODO
 ----
  - Päivitä aihemäärittely vastaamaan suunnitelmaa
  - Päivitä luokkakaavio vastaamaan todellisuutta
  - Erottele load ja save ja kirjoita niille testit
- + Sirottele Javadoccia koodiin
- + Pidä pelitila kentän muuttuessa
- + Laita peli skaalautumaan ohjelman ikkunan mukaan

@@ -104,187 +104,89 @@ public class LifeSet extends BitSet implements LifeLogic {
      * @param n Number of steps.
      */
     public void walk(int n) {
-        for (; n>0; n--) {
-            step();
-        }
+        for (; n>0; n--) step();
     }
 
     /**
      * One step of cellular automation.
      *
-     * Current set is updated according to the rules of Game of Life.
-     *
-     * Update is pretty straightforward task, but some implementation details
-     * make the code quite verbose.
+     * Current set is updated in place according to the rules of Game of Life.
      *
      * {@link http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life}
-     *
-     * Rationale of the update:
-     *  + Iterate through the set.
-     *  + Because the status of any cell is determined by adjacent cells,
-     *    buffer three rows (previous, current and next row) of information
-     *    about the number of living neighbours.
-     *  + Whenever we have complete knowledge of a row, update that row.
-     *  + Cycle buffers at the end of each row and continue.
-     *
-     * Nasty details:
-     *  + To initialize buffers, first line must be read before main loop.
-     *  + First and last cell are handled separately to eliminate conditional
-     *    statements from loops.
-     *  + Reading the last row and updating the last two rows are done
-     *    after the main loop.
      */
     @Override
     public void step() {
-        int index;
+        int col, row;
+        int lastline = 0;
+        buffer = new StepBuffer(width);
 
-        /* Creating buffers.
-         */
-        int[] prev = new int[width];
-        int[] curr = new int[width];
-        int[] next = new int[width];
+        for (int i=nextSetBit(0); i>=0; i=nextSetBit(i+1)) {
+            col = i%width;
+            row = i/width;
 
-        /* Scanning 1st row before main loop.
-         */
-        for (int x=0; x<width; x++) {
-            if (getLife(0, x)) {
-                curr[x]++;
-                if (x > 0) {
-                    prev[x-1]++;
-                    curr[x-1]++;
-                }
-                if (x < width-1) {
-                    prev[x+1]++;
-                    curr[x+1]++;
-                }
+            if (row != lastline) {
+                lastline = advanceRow(row, lastline, StepBuffer.DEPTH);
             }
+
+            buffer.itsAlive(col);
         }
 
-        /* Main algorithm loop.
-         */
-        for (int y=1; y<height-1; y++) {
-            /* First column.
-             */
-            if (getLife(y, 0)) {
-                prev[0]++;
-                prev[1]++;
-                curr[1]++;
-                next[1]++;
-                next[0]++;
-            }
+        advanceRow(Integer.MAX_VALUE, lastline, StepBuffer.DEPTH);
+    }
 
-            /* Columns in between.
-             */
-            for (int x=1; x<width-1; x++) {
-                if (getLife(y, x)) {
-                    prev[x-1]++;
-                    prev[x]++;
-                    prev[x+1]++;
-                    curr[x-1]++;
-                    curr[x+1]++;
-                    next[x-1]++;
-                    next[x]++;
-                    next[x+1]++;
-                }
-            }
-
-            /* Last column.
-             */
-            if (getLife(y, width-1)) {
-                prev[width-1]++;
-                prev[width-2]++;
-                curr[width-2]++;
-                next[width-2]++;
-                next[width-1]++;
-            }
-
-            /* At this point, we have complete knowledge of the
-             * previous line, so lets update set status by these
-             * rules:
-             *
-             *  + Zero or one neighbours  => death by under-population
-             *  + Two neighbours          => stays the same
-             *  + Three neighbours        => live by reproduction
-             *  + Four or more neighbours => death by overcrowding
-             */
-            for (int x=0; x<width; x++) {
-                index = width*(y-1) + x;
-
-                if (prev[x] < 2) {
-                    clear(index);
-                }
-                else if (prev[x] == 3) {
-                    set(index);
-                }
-                else if (prev[x] >= 4) {
-                    clear(index);
-                }
-            }
-
-            /* Cycle buffers to next line.
-             */
-            prev = curr;
-            curr = next;
-            next = new int[width];
+    /**
+     * Advance the row index.
+     *
+     * Write out buffers and return new row index. If buffers have been
+     * emptied, fast forward the row index to current scan line.
+     *
+     * @param scanline  Current scan line.
+     * @param lastline  Previously scanned line.
+     * @param iteration Recursion limit. When this hits zero, buffers
+     *                  should be empty and we can jump forward.
+     *
+     * @return New current scan line index.
+     */
+    private int advanceRow(int scanline, int lastline, int iteration) {
+        if (scanline == lastline || iteration <= 0) {
+            return scanline;
         }
-
-        /* Scan the last row and make final buffer updates.
-         */
-        for (int x=0; x<width; x++) {
-            if (getLife(height-1, x)) {
-                prev[x]++;
-                if (x > 0) {
-                    prev[x-1]++;
-                    curr[x-1]++;
-                }
-                if (x < width-1) {
-                    prev[x+1]++;
-                    curr[x+1]++;
-                }
-            }
-        }
-
-        /* Update game status on last two rows.
-         */
-        for (int x=0; x<width; x++) {
-            index = width*(height-2) + x;
-
-            if (prev[x] < 2) {
-                clear(index);
-            }
-            else if (prev[x] == 3) {
-                set(index);
-            }
-            else if (prev[x] >= 4) {
-                clear(index);
-            }
-
-            index = width*(height-1) + x;
-
-            if (curr[x] < 2) {
-                clear(index);
-            }
-            else if (curr[x] == 3) {
-                set(index);
-            }
-            else if (curr[x] >= 4) {
-                clear(index);
-            }
+        else {
+            updateRow(lastline-1);
+            return advanceRow(scanline, lastline+1, iteration-1);
         }
     }
 
     /**
-     * Get the bit value of the specified x,y coordinate.
+     * Update a row per Game of Life rules.
      *
-     * @param y Row.
-     * @param x Column.
+     * + Zero or one neighbours  => death by under-population
+     * + Two neighbours          => stays the same
+     * + Three neighbours        => live by reproduction
+     * + Four or more neighbours => death by overcrowding
      *
-     * @return True if bit is set. False otherwise.
+     * @param row The index of the row to update.
      */
-    private boolean getLife(int y, int x) {
-        return get(width*y + x);
+    private void updateRow(int row) {
+        if (row < 0) return;
+
+        int base = width*row;
+        byte[] neighbours = buffer.getRow();
+
+        for (int i=0; i<neighbours.length; i++) {
+            if (neighbours[i] < 2) {
+                clear(base+i);
+            }
+            else if (neighbours[i] == 3) {
+                set(base+i);
+            }
+            else if (neighbours[i] >= 4) {
+                clear(base+i);
+            }
+        }
     }
 
     private int width;
     private int height;
+    private StepBuffer buffer;
 }
