@@ -18,20 +18,21 @@ Käyttöliittymäelementit
 
 ![Käyttöliittymä](life.png?raw=true)
 
- - **Load**-painikkeella ladataan aiemmin tallennettu pelitilanne
+ + **Load**-painikkeella ladataan aiemmin tallennettu pelitilanne
    tiedostosta.
 
- - **Save**-painikkeella tallennetaan sen hetkinen pelitilanne
+ + **Save**-painikkeella tallennetaan sen hetkinen pelitilanne
    tiedostoon.
 
- - **Delay**-syötekenttä määrittää viipeen jatkuvan simulaation
+ + **Delay**-syötekenttä määrittää viipeen jatkuvan simulaation
    päivitysten välissä. Yksikkö on sekunnin sadasosa.
 
- - **Step**-painike vie simulaatiota yhden aika-askeleen eteenpäin.
+ + **Step**-painike vie simulaatiota yhden aika-askeleen eteenpäin.
 
- - **Start**-painike aloittaa jatkuvan simulaation. Simulaatio
+ + **Start**-painike aloittaa jatkuvan simulaation. Simulaatio
    pysäytetään samasta painikkeesta.
 
- - Pelialueella voi *hiiren klikkauksella* herättää henkiin kuolleen
-   solun tai tapaa hengissä olevan solun. *Hiiren rullan* avulla
-   pelialuetta voi lähentää tai loitontaa.
+ + Pelialueella voi **hiiren klikkauksella** herättää henkiin kuolleen
+   solun tai tapaa hengissä olevan solun.
+
+ + **Hiiren rullan** avulla pelialuetta voi lähentää tai loitontaa.
