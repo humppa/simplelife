@@ -105,10 +105,5 @@ Tuntikirjanpito
 2013-04-24
 ----------
 
-01:47:46: Nyt oon jo niin monena päivänä unohtannu pitää kirjaa tunneista, että antaa jo olla.
-
-TODO
-----
- - Päivitä aihemäärittely vastaamaan suunnitelmaa
- - Päivitä luokkakaavio vastaamaan todellisuutta
- - Erottele load ja save ja kirjoita niille testit
+01:47:46: Nyt oon jo niin monena päivänä unohtannu pitää kirjaa tunneista,
+          että antaa jo olla. Ehkä ~50 tuntia puuttuu.
