@@ -6,7 +6,7 @@ import javax.swing.SwingUtilities;
 /**
  * Simple Life is a Game of Life implementation.
  *
- * {@link http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life}
+ * <p>{@link http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life}</p>
  *
  * @see fi.starck.simplelife.LifeSet
  *

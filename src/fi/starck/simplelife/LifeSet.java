@@ -3,14 +3,15 @@ package fi.starck.simplelife;
 import java.util.BitSet;
 
 /**
- * Memory effective Game of Life implementation.
+ * Game of Life implementation.
  *
- * Game of Life is cellular automation where each cell is either on or off.
+ * <p>Game of Life is cellular automation where each cell is either on or
+ * off.</p>
  *
- * This implementation is finite and noncyclic. The collection of cells is
- * mapped to Java's BitSet and Game of Life rules are added on top of that.
- * Most important part is the step() method, which updates the game state
- * one time step forward.
+ * <p>This implementation is finite and noncyclic. The collection of cells
+ * is mapped to Java's <i>BitSet</i> and Game of Life rules are added on
+ * top of that. Most important part is the <i>step()</i> method, which
+ * updates the game state one time step forward.</p>
  *
  * @see #step()
  * @see java.util.BitSet
@@ -41,7 +42,7 @@ public class LifeSet extends BitSet implements LifeLogic {
     }
 
     /**
-     * Create a new set and initialize it with existing set.
+     * Initialize a new set with an existing set.
      *
      * @param w   Width of the set.
      * @param h   Height of the set.
@@ -110,7 +111,8 @@ public class LifeSet extends BitSet implements LifeLogic {
     /**
      * One step of cellular automation.
      *
-     * Current set is updated in place according to the rules of Game of Life.
+     * <p>Current set is updated in place according to the rules of
+     * Game of Life.</p>
      *
      * {@link http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life}
      */
@@ -158,12 +160,12 @@ public class LifeSet extends BitSet implements LifeLogic {
     }
 
     /**
-     * Update a row per Game of Life rules.
+     * <p>Update a row per Game of Life rules.</p>
      *
-     * + Zero or one neighbours  => death by under-population
-     * + Two neighbours          => stays the same
-     * + Three neighbours        => live by reproduction
-     * + Four or more neighbours => death by overcrowding
+     * + Zero or one neighbours  => death by under-population<br />
+     * + Two neighbours          => stays the same<br />
+     * + Three neighbours        => live by reproduction<br />
+     * + Four or more neighbours => death by overcrowding<br />
      *
      * @param row The index of the row to update.
      */

@@ -1,9 +1,16 @@
 package fi.starck.simplelife;
 
 /**
- * Neighbouring information buffer for the LifeSet time step method.
+ * Neighbouring information buffer.
  *
- * @see fi.starck.simplelife.LifeSet
+ * <p>When updating Game of Life to the next step in time, one is
+ * required to know, how many neighbouring cells any given cell has.
+ * This class provides three rows of buffer. Three because, every
+ * cell affects other cells on previous, current and next rows.
+ * With three rows of buffer, game set can be iterated and updated
+ * linearly.</p>
+ *
+ * @see fi.starck.simplelife.LifeSet#step()
  *
  * @author Tuomas Starck
  */
@@ -27,27 +34,27 @@ class StepBuffer {
     /**
      * Increase the count by one in all neighbouring cells.
      *
-     * On every first and last cell of a row, there is no
+     * <p>On every first and last cell of a row, there is no
      * previous or next neighbour. This is normal and thus
-     * indexing exceptions can safely be ignored.
+     * indexing exceptions can safely be ignored.</p>
      *
-     * @param x Column index.
+     * @param i Column index.
      */
-    void itsAlive(int x) {
-        prev[x]++;
-        next[x]++;
+    void itsAlive(int i) {
+        prev[i]++;
+        next[i]++;
 
         try {
-            prev[x-1]++;
-            curr[x-1]++;
-            next[x-1]++;
+            prev[i-1]++;
+            curr[i-1]++;
+            next[i-1]++;
         }
         catch (ArrayIndexOutOfBoundsException ignore) {}
 
         try {
-            prev[x+1]++;
-            curr[x+1]++;
-            next[x+1]++;
+            prev[i+1]++;
+            curr[i+1]++;
+            next[i+1]++;
         }
         catch (ArrayIndexOutOfBoundsException ignore) {}
     }
